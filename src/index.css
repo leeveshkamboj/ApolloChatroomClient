@@ -1,13 +1,92 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+.msgcon {
+  border: 2px solid rgba(0, 0, 0, 0.315);
+  border-radius: 10px;
+  width: auto;
+  margin: auto;
+  height: 600px;
+  padding: 20px;
+  overflow-y: scroll;
+}
+
+.loadingMessages {
+  margin: auto;
+  margin-top: 200px;
+  padding: 10px;
+  text-align: center;
+}
+
+.no-message{
+  font-size: large;
+  margin: auto;
+  margin-top: 200px;
+  padding: 10px;
+  text-align: center;
+}
+
+.inputcon {
+  width: auto;
+  margin: auto;
+  height: auto;
+  margin-top: 10px;
+}
+
+.back {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.messages {
+  background-color: white;
+  border: 1px solid rgba(0, 0, 0, 0.274);
+  color: black;
+  border-radius: 15px;
+  font-size: large;
+  padding: 4px;
+  width: auto;
+  height: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin: 5px;
+}
+
+.message-titles {
+  font-size: 15px;
+  display: flex;
+  justify-content: flex-start;
+  padding-left: 12px;
+  padding-top: 5px;
+  margin-bottom: -5px;
+}
+
+.self-back {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.self-messages {
+  background-color: #0779fa;
+  border: 1px solid rgba(0, 0, 0, 0.274);
+  color: white;
+  border-radius: 15px;
+  font-size: large;
+  padding: 6px;
+  width: auto;
+  height: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin: 5px;
 }
