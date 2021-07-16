@@ -99,7 +99,7 @@ export default function Globalchat() {
               )}
             </>
           ))
-        ) : (errors?
+        ) : (Object.keys(errors).length > 0?
           <div className="no-message">{errors.server}</div>:<div className="no-message">No messages.</div>
         )}
         <div ref={messagesEndRef} />

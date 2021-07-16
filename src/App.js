@@ -10,7 +10,6 @@ import { Container } from "react-bootstrap";
 import { setContext } from "apollo-link-context";
 import { getMainDefinition } from "@apollo/client/utilities";
 
-import Config from "./config";
 import Login from "./components/login";
 import Home from "./components/home";
 import MenuBar from "./components/navbar";
@@ -20,15 +19,18 @@ import Register from "./components/register";
 import Verify from "./components/verify";
 import { WebSocketLink } from "@apollo/client/link/ws";
 
+const httpUrl = "https://apollochatroom.herokuapp.com/graphql";
+const webSocketUrl = "wss://apollochatroom.herokuapp.com/graphql";
+
 const wsLink = new WebSocketLink({
-  uri: Config.webSocketUrl,
+  uri: webSocketUrl,
   options: {
     reconnect: true,
   },
 });
 
 const httpLink = createHttpLink({
-  uri: Config.httpUrl,
+  uri: httpUrl,
 });
 
 const authLink = setContext(() => {
