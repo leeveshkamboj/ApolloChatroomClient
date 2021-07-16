@@ -24,7 +24,7 @@ export default function MenuBar() {
                   Login
                 </Nav.Link>
                 <Nav.Link as={Link} to="/register">
-                  Reister
+                  Register
                 </Nav.Link>
               </>
             )}

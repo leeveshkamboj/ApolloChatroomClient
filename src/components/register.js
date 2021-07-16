@@ -82,7 +82,7 @@ export default function Register() {
         </Form.Group>
 
         <Form.Group controlId="formBasicconfirmPassword">
-          <Form.Label>confirmPassword</Form.Label>
+          <Form.Label>Confirm Password</Form.Label>
           <Form.Control
             name="confirmPass"
             type="password"
