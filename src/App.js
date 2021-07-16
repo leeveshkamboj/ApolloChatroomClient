@@ -76,7 +76,7 @@ function App() {
               <Route path="/register">
                 <Register />
               </Route>
-              <Route path="/verify">
+              <Route path="/verify/:token">
                 <Verify />
               </Route>
               <Route exact path="/">
