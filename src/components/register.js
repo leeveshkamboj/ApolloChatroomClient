@@ -123,7 +123,8 @@ export default function Register() {
           </Modal.Header>
           <Modal.Body>
             We have sent you a verification link to {data.register.email}.
-            Please check your email and click on the link provided
+            Please check your email and click on the link provided.
+            If you can't find the mail please check spam folder. Contact support@chatify.tech for futher information.
           </Modal.Body>
           <Modal.Footer>
             <Button variant="primary" as={Link} to="/">

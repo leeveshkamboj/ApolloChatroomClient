@@ -10,7 +10,7 @@ export default function MenuBar() {
       <Navbar bg="primary" variant="dark">
         <Container>
           <Navbar.Brand as={Link} to="/">
-            Noice
+            Chatify
           </Navbar.Brand>
           <Nav>
             <Nav.Link as={Link} to="/about">
