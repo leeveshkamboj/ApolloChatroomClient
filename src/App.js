@@ -19,8 +19,8 @@ import Register from "./components/register";
 import Verify from "./components/verify";
 import { WebSocketLink } from "@apollo/client/link/ws";
 
-const httpUrl = "https://apollochatroom.herokuapp.com/graphql";
-const webSocketUrl = "wss://apollochatroom.herokuapp.com/graphql";
+const httpUrl = "http://server.chatify.tech/graphql";
+const webSocketUrl = "ws://server.chatify.tech/graphql";
 
 const wsLink = new WebSocketLink({
   uri: webSocketUrl,
