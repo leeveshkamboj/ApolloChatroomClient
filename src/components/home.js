@@ -15,7 +15,8 @@ export default function Home() {
           <>{user.username} !</>
         ) : (
           <>
-            Guest! Please <Link to={"/login"}>Login</Link> to send messages.
+            Guest! Please <Link to={"/login"}>Login</Link> or{" "}
+            <Link to={"/register"}>Register</Link>.
           </>
         )}
       </h3>

@@ -53,4 +53,22 @@ const SEND_MESSAGE = gql`
   }
 `;
 
-export { LOGIN_MUTATION, REGISTER_MUTATION, VERIFY_EMAIL_MUTATION , SEND_MESSAGE};
+const SEND_PM = gql`
+  mutation PostPmMutation($postPmUsername: String!, $postPmBody: String!) {
+    postPm(username: $postPmUsername, body: $postPmBody) {
+      id
+      username
+      createdAt
+      body
+      seen
+    }
+  }
+`;
+
+export {
+  LOGIN_MUTATION,
+  REGISTER_MUTATION,
+  VERIFY_EMAIL_MUTATION,
+  SEND_MESSAGE,
+  SEND_PM,
+};

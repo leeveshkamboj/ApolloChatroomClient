@@ -9,20 +9,29 @@ import {
 } from "react-bootstrap";
 
 import { AuthContext } from "../context/auth";
-import { GET_MESSAGE_QUERRY } from "../graphql/queries";
-import { SEND_MESSAGE } from "../graphql/mutations";
-import { NEW_MESSAGE_SUBSCRIPTION } from "../graphql/subscriptions";
-import { Link } from "react-router-dom";
+import { GET_PM_QUERRY } from "../graphql/queries";
+import { SEND_PM } from "../graphql/mutations";
+import { NEW_PM_SUBSCRIPTION } from "../graphql/subscriptions";
 
-export default function Globalchat() {
+export default function Chat() {
   const { user } = useContext(AuthContext);
+  // console.log(context);
+  const [username, setUsername] = useState("");
+  const re = /chat\/(.*)/i;
+  const check = window.location.pathname.match(re);
+  if (check && check[1] !== username) {
+    setUsername(check[1]);
+  }
   const messagesEndRef = useRef(null);
   const messageInputRef = useRef(null);
 
   const [errors, setErrors] = useState({});
 
   const [messages, setMessages] = useState([]);
-  const { loading, data } = useQuery(GET_MESSAGE_QUERRY, {
+  const { loading, data } = useQuery(GET_PM_QUERRY, {
+    variables: {
+      getPmsUsername: username,
+    },
     onError: (err) => {
       if (err.networkError) {
         setErrors({ server: "Server Offline." });
@@ -34,7 +43,7 @@ export default function Globalchat() {
   });
   useEffect(() => {
     if (data) {
-      setMessages(data.getMessages);
+      setMessages(data.getPms);
     }
   }, [data]);
 
@@ -49,21 +58,24 @@ export default function Globalchat() {
   const onChange = (e) => {
     setSendMessageValue(e.target.value);
   };
-
-  const sub = useSubscription(NEW_MESSAGE_SUBSCRIPTION);
+  const sub = useSubscription(NEW_PM_SUBSCRIPTION, {
+    variables: {
+      pmCreatedToken: localStorage.getItem("jwtToken"),
+      pmCreatedUsername: username,
+    },
+  });
   var newMessages = sub.data;
   useEffect(() => {
     if (newMessages) {
-      setMessages((m) => [...m, newMessages.messageCreated]);
+      setMessages((m) => [...m, newMessages.pmCreated]);
     }
   }, [newMessages]);
 
-  const [send, { loading: msgSendingLoading }] = useMutation(SEND_MESSAGE, {
-    update() {
-      messageInputRef.current.value = "";
-    },
+  const [send, { loading: msgSendingLoading }] = useMutation(SEND_PM, {
+    update() {},
     variables: {
-      postMessageBody: sendMessageValue,
+      postPmUsername: username,
+      postPmBody: sendMessageValue,
     },
     onError: (err) => {
       if (err.networkError) {
@@ -74,6 +86,11 @@ export default function Globalchat() {
       }
     },
   });
+  useEffect(() => {
+    if (msgSendingLoading) {
+      messageInputRef.current.value = "";
+    }
+  }, [msgSendingLoading]);
   const handleKeypress = (e) => {
     if (e.charCode === 13) {
       send();
@@ -82,6 +99,7 @@ export default function Globalchat() {
 
   return (
     <div>
+      <h2 className="text-center">{username}</h2>
       <div className="msgcon">
         {loading ? (
           <div className="loadingMessages">
@@ -91,17 +109,14 @@ export default function Globalchat() {
           Object.values(messages).map((value) => (
             <>
               {user && value.username === user.username ? (
-                <div className="self-back">
-                  <div className="self-messages">{value.body}</div>
-                </div>
+                <>
+                  <div className="self-back">
+                    <div className="self-messages">{value.body}</div>
+                    <br />
+                  </div>
+                </>
               ) : (
                 <>
-                  <Link
-                    to={`/chat/${value.username}`}
-                    className="message-titles"
-                  >
-                    {value.username}
-                  </Link>
                   <div className="back">
                     <div className="messages">{value.body}</div>
                   </div>
@@ -129,7 +144,7 @@ export default function Globalchat() {
               ref={messageInputRef}
             />
             <Button variant="outline-primary" id="button-addon2" onClick={send}>
-              {msgSendingLoading ? (
+              {msgSendingLoading && messageInputRef.current.value ? (
                 <Spinner
                   as="span"
                   animation="border"

@@ -29,7 +29,7 @@ code {
   text-align: center;
 }
 
-.no-message{
+.no-message {
   font-size: large;
   margin: auto;
   margin-top: 200px;
@@ -63,13 +63,14 @@ code {
   margin: 5px;
 }
 
-.message-titles {
+.message-titles, .message-titles:hover, .message-titles:focus, .message-titles:active {
   font-size: 15px;
   display: flex;
   justify-content: flex-start;
   padding-left: 12px;
   padding-top: 5px;
   margin-bottom: -5px;
+  color: black;
 }
 
 .self-back {

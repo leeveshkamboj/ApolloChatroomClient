@@ -18,6 +18,8 @@ import About from "./components/about";
 import Register from "./components/register";
 import Verify from "./components/verify";
 import { WebSocketLink } from "@apollo/client/link/ws";
+import Chat from "./components/chat";
+import Contacts from "./components/contacts";
 
 const httpUrl = "https://apollochatroom.herokuapp.com/graphql";
 const webSocketUrl = "wss://apollochatroom.herokuapp.com/graphql";
@@ -80,6 +82,12 @@ function App() {
               </Route>
               <Route path="/verify/:token">
                 <Verify />
+              </Route>
+              <Route path="/chat/:username">
+                <Chat />
+              </Route>
+              <Route path="/chat">
+                <Contacts />
               </Route>
               <Route exact path="/">
                 <Home />
