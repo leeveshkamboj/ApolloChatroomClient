@@ -36,6 +36,7 @@ export default function Chat() {
     variables: {
       getPmsUsername: username,
     },
+    fetchPolicy: "cache-and-network",
     onError: (err) => {
       if (err.networkError) {
         setErrors({ server: "Server Offline." });
@@ -76,10 +77,9 @@ export default function Chat() {
         play();
       }
       setMessages((m) => [...m, newMessages.pmCreated]);
-      
     }
-     // eslint-disable-next-line
-  }, [newMessages, play]); 
+    // eslint-disable-next-line
+  }, [newMessages, play]);
 
   const [send, { loading: msgSendingLoading }] = useMutation(SEND_PM, {
     update() {},

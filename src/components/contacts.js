@@ -15,6 +15,7 @@ export default function Contacts() {
   }
   const [errors, setErrors] = useState([]);
   const { loading, data } = useQuery(GET_CONTACT, {
+    fetchPolicy: "cache-and-network",
     onError: (err) => {
       if (err.networkError) {
         setErrors({ server: "Server Offline." });

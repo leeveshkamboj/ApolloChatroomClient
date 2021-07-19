@@ -13,8 +13,7 @@ export default function MenuBar() {
     logout();
     history.push("/");
   }
-  const { data } = useQuery(GET_UNREAD);
-  console.log(data);
+  const { data } = useQuery(GET_UNREAD, {fetchPolicy: "cache-and-network"});
   return (
     <div>
       <Navbar bg="primary" variant="dark">
