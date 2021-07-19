@@ -1,5 +1,6 @@
 import React, { useState, useContext, useRef, useEffect } from "react";
 import { useQuery, useMutation, useSubscription } from "@apollo/client";
+import useSound from "use-sound";
 import {
   InputGroup,
   FormControl,
@@ -11,11 +12,15 @@ import {
 import { AuthContext } from "../context/auth";
 import { GET_PM_QUERRY } from "../graphql/queries";
 import { SEND_PM } from "../graphql/mutations";
-import { NEW_PM_SUBSCRIPTION } from "../graphql/subscriptions";
+import {
+  NEW_PM_SUBSCRIPTION,
+  SEEN_SUBSCRIPTION,
+} from "../graphql/subscriptions";
+import notificationSfx from "../sounds/notification.wav";
 
 export default function Chat() {
+  const [play] = useSound(notificationSfx);
   const { user } = useContext(AuthContext);
-  // console.log(context);
   const [username, setUsername] = useState("");
   const re = /chat\/(.*)/i;
   const check = window.location.pathname.match(re);
@@ -58,16 +63,21 @@ export default function Chat() {
   const onChange = (e) => {
     setSendMessageValue(e.target.value);
   };
-  const sub = useSubscription(NEW_PM_SUBSCRIPTION, {
+  const { data: newMessages } = useSubscription(NEW_PM_SUBSCRIPTION, {
     variables: {
       pmCreatedToken: localStorage.getItem("jwtToken"),
       pmCreatedUsername: username,
     },
   });
-  var newMessages = sub.data;
+  const { data: newSeen } = useSubscription(SEEN_SUBSCRIPTION);
+
   useEffect(() => {
     if (newMessages) {
+      if (!focus) {
+        play();
+      }
       setMessages((m) => [...m, newMessages.pmCreated]);
+
     }
   }, [newMessages]);
 
@@ -97,6 +107,23 @@ export default function Chat() {
     }
   };
 
+  const [focus, setFocus] = useState(true);
+  const onFocus = () => {
+    setFocus(true);
+  };
+
+  const onBlur = () => {
+    setFocus(false);
+  };
+
+  useEffect(() => {
+    window.addEventListener("focus", onFocus);
+    window.addEventListener("blur", onBlur);
+    return () => {
+      window.removeEventListener("focus", onFocus);
+      window.removeEventListener("blur", onBlur);
+    };
+  });
   return (
     <div>
       <h2 className="text-center">{username}</h2>
@@ -129,6 +156,17 @@ export default function Chat() {
         ) : (
           <div className="no-message">No messages.</div>
         )}
+        {user &&
+        Object.keys(messages).length > 0 &&
+        messages[messages.length - 1].username === user.username &&
+        (messages[messages.length - 1].seen ||
+          (newSeen &&
+            messages[messages.length - 1].id === newSeen.pmSeenSub)) ? (
+          <div className="seen">seen</div>
+        ) : (
+          ""
+        )}
+
         <div ref={messagesEndRef} />
       </div>
 

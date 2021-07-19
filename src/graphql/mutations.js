@@ -65,10 +65,17 @@ const SEND_PM = gql`
   }
 `;
 
+const SEARCH_USER_MUTATION = gql`
+  mutation SearchMutation($searchUsername: String!) {
+    search(username: $searchUsername)
+  }
+`;
+
 export {
   LOGIN_MUTATION,
   REGISTER_MUTATION,
   VERIFY_EMAIL_MUTATION,
   SEND_MESSAGE,
   SEND_PM,
+  SEARCH_USER_MUTATION,
 };

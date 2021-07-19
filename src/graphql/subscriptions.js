@@ -26,4 +26,10 @@ const NEW_PM_SUBSCRIPTION = gql`
   }
 `;
 
-export { NEW_MESSAGE_SUBSCRIPTION, NEW_PM_SUBSCRIPTION };
+const SEEN_SUBSCRIPTION = gql`
+  subscription Subscription {
+    pmSeenSub
+  }
+`;
+
+export { NEW_MESSAGE_SUBSCRIPTION, NEW_PM_SUBSCRIPTION, SEEN_SUBSCRIPTION };

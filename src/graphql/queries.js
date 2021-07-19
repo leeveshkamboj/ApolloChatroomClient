@@ -26,12 +26,24 @@ const GET_PM_QUERRY = gql`
 const GET_CONTACT = gql`
   query Query {
     getContacts {
-      username
-      lastMessageUsername
-      lastMessage
-      lastMessageAt
+      contacts {
+        username
+        lastMessageUsername
+        lastMessageAt
+        lastMessage
+        lastMessageSeen
+      }
+      unread
     }
   }
 `;
 
-export { GET_MESSAGE_QUERRY, GET_PM_QUERRY, GET_CONTACT };
+const GET_UNREAD = gql`
+  query Query {
+    getContacts {
+      unread
+    }
+  }
+`;
+
+export { GET_MESSAGE_QUERRY, GET_PM_QUERRY, GET_CONTACT, GET_UNREAD };

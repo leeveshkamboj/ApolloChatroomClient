@@ -20,9 +20,12 @@ import Verify from "./components/verify";
 import { WebSocketLink } from "@apollo/client/link/ws";
 import Chat from "./components/chat";
 import Contacts from "./components/contacts";
+import Search from "./components/search";
 
-const httpUrl = "https://apollochatroom.herokuapp.com/graphql";
-const webSocketUrl = "wss://apollochatroom.herokuapp.com/graphql";
+// const httpUrl = "https://apollochatroom.herokuapp.com/graphql";
+const httpUrl = "http://localhost:4000/graphql";
+// const webSocketUrl = "wss://apollochatroom.herokuapp.com/graphql";
+const webSocketUrl = "ws://localhost:4000/graphql";
 
 const wsLink = new WebSocketLink({
   uri: webSocketUrl,
@@ -85,6 +88,9 @@ function App() {
               </Route>
               <Route path="/chat/:username">
                 <Chat />
+              </Route>
+              <Route path="/search">
+                <Search />
               </Route>
               <Route path="/chat">
                 <Contacts />
