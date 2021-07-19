@@ -1,6 +1,6 @@
 import React, { useState, useContext, useRef, useEffect } from "react";
 import { useQuery, useMutation, useSubscription } from "@apollo/client";
-import useSound from "use-sound";
+// import useSound from "use-sound";
 import {
   InputGroup,
   FormControl,
@@ -16,10 +16,10 @@ import {
   NEW_PM_SUBSCRIPTION,
   SEEN_SUBSCRIPTION,
 } from "../graphql/subscriptions";
-import notificationSfx from "../sounds/notification.wav";
+// import notificationSfx from "../sounds/notification.wav";
 
 export default function Chat() {
-  const [play] = useSound(notificationSfx);
+  // const [play] = useSound(notificationSfx);
   const { user } = useContext(AuthContext);
   const [username, setUsername] = useState("");
   const re = /chat\/(.*)/i;
@@ -74,7 +74,7 @@ export default function Chat() {
   useEffect(() => {
     if (newMessages) {
       if (!focus) {
-        play();
+        // play();
       }
       setMessages((m) => [...m, newMessages.pmCreated]);
 
