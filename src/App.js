@@ -22,10 +22,10 @@ import Chat from "./components/chat";
 import Contacts from "./components/contacts";
 import Search from "./components/search";
 
-// const httpUrl = "https://apollochatroom.herokuapp.com/graphql";
-const httpUrl = "http://localhost:4000/graphql";
-// const webSocketUrl = "wss://apollochatroom.herokuapp.com/graphql";
-const webSocketUrl = "ws://localhost:4000/graphql";
+const httpUrl = "https://apollochatroom.herokuapp.com/graphql";
+// const httpUrl = "http://localhost:4000/graphql";
+const webSocketUrl = "wss://apollochatroom.herokuapp.com/graphql";
+// const webSocketUrl = "ws://localhost:4000/graphql";
 
 const wsLink = new WebSocketLink({
   uri: webSocketUrl,
