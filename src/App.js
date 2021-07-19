@@ -22,16 +22,14 @@ import Chat from "./components/chat";
 import Contacts from "./components/contacts";
 import Search from "./components/search";
 
-const httpUrl = "https://apollochatroom.herokuapp.com/graphql";
-// const httpUrl = "http://localhost:4000/graphql";
-const webSocketUrl = "wss://apollochatroom.herokuapp.com/graphql";
-// const webSocketUrl = "ws://localhost:4000/graphql";
+// const httpUrl = "https://apollochatroom.herokuapp.com/graphql";
+const httpUrl = "http://localhost:4000/graphql";
+// const webSocketUrl = "wss://apollochatroom.herokuapp.com/graphql";
+const webSocketUrl = "ws://localhost:4000/graphql";
 
 const wsLink = new WebSocketLink({
   uri: webSocketUrl,
-  options: {
-    reconnect: true,
-  },
+
 });
 
 const httpLink = createHttpLink({
@@ -74,30 +72,14 @@ function App() {
             <br />
             <br />
             <Switch>
-              <Route path="/about">
-                <About />
-              </Route>
-              <Route path="/login">
-                <Login />
-              </Route>
-              <Route path="/register">
-                <Register />
-              </Route>
-              <Route path="/verify/:token">
-                <Verify />
-              </Route>
-              <Route path="/chat/:username">
-                <Chat />
-              </Route>
-              <Route path="/search">
-                <Search />
-              </Route>
-              <Route path="/chat">
-                <Contacts />
-              </Route>
-              <Route exact path="/">
-                <Home />
-              </Route>
+              <Route path="/about" component={About} />
+              <Route path="/login" component={Login} />
+              <Route path="/register" component={Register} />
+              <Route path="/verify/:token" component={Verify} />
+              <Route path="/chat/:username" component={Chat} />
+              <Route path="/search" component={Search} />
+              <Route path="/chat" component={Contacts} />
+              <Route exact path="/" component={Home} />
             </Switch>
           </Container>
         </Router>

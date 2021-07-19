@@ -157,6 +157,7 @@ export default function Chat() {
           <div className="no-message">No messages.</div>
         )}
         {user &&
+        !loading &&
         Object.keys(messages).length > 0 &&
         messages[messages.length - 1].username === user.username &&
         (messages[messages.length - 1].seen ||

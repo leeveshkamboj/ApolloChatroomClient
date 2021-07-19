@@ -1,19 +1,22 @@
 import React, { useContext } from "react";
-import { Navbar, Nav, Container, Badge } from "react-bootstrap";
+import { Navbar, Nav, Container, Button } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 
 import { AuthContext } from "../context/auth";
 import { GET_UNREAD } from "../graphql/queries";
 
-export default function MenuBar() {
+export default function MenuBar(props) {
   const history = useHistory();
   const { user, logout } = useContext(AuthContext);
   function onLogout() {
     logout();
     history.push("/");
   }
-  const { data } = useQuery(GET_UNREAD, {fetchPolicy: "cache-and-network"});
+
+  const { data } = useQuery(GET_UNREAD
+    ,{pollInterval: 1000});
+
   return (
     <div>
       <Navbar bg="primary" variant="dark">
@@ -22,28 +25,30 @@ export default function MenuBar() {
             Chatify
           </Navbar.Brand>
           <Nav>
-            <Nav.Link as={Link} to="/about">
+            <Button as={Link} to="/about">
               About
-            </Nav.Link>
+            </Button>
             {user ? (
               <>
-                <Nav.Link as={Link} to="/chat">
+                <Button as={Link} to="/chat">
                   Contacts
                   {data && data.getContacts.unread !== 0 && (
-                    <Badge bg="secondary">{data.getContacts.unread}</Badge>
+                    <div className="notification-badge">
+                      {data.getContacts.unread}
+                    </div>
                   )}
-                </Nav.Link>
+                </Button>
 
-                <Nav.Link onClick={onLogout}>Logout</Nav.Link>
+                <Button onClick={onLogout}>Logout</Button>
               </>
             ) : (
               <>
-                <Nav.Link as={Link} to="/login">
+                <Button as={Link} to="/login">
                   Login
-                </Nav.Link>
-                <Nav.Link as={Link} to="/register">
+                </Button>
+                <Button as={Link} to="/register">
                   Register
-                </Nav.Link>
+                </Button>
               </>
             )}
           </Nav>

@@ -60,7 +60,7 @@ export default function Globalchat() {
 
   const [send, { loading: msgSendingLoading }] = useMutation(SEND_MESSAGE, {
     update() {
-      messageInputRef.current.value = "";
+      setSendMessageValue("")
     },
     variables: {
       postMessageBody: sendMessageValue,
@@ -74,6 +74,13 @@ export default function Globalchat() {
       }
     },
   });
+
+  useEffect(() => {
+    if (msgSendingLoading) {
+      messageInputRef.current.value = "";
+    }
+  }, [msgSendingLoading]);
+
   const handleKeypress = (e) => {
     if (e.charCode === 13) {
       send();
