@@ -21,6 +21,7 @@ import { WebSocketLink } from "@apollo/client/link/ws";
 import Chat from "./components/chat";
 import Contacts from "./components/contacts";
 import Search from "./components/search";
+import NotFound from "./components/404";
 
 const httpUrl = "https://apollochatroom.herokuapp.com/graphql";
 // const httpUrl = "http://localhost:4000/graphql";
@@ -72,14 +73,17 @@ function App() {
             <br />
             <br />
             <Switch>
-              <Route path="/about" component={About} />
-              <Route path="/login" component={Login} />
-              <Route path="/register" component={Register} />
-              <Route path="/verify/:token" component={Verify} />
-              <Route path="/chat/:username" component={Chat} />
-              <Route path="/search" component={Search} />
-              <Route path="/chat" component={Contacts} />
+              <Route exact path="/about" component={About} />
+              <Route exact path="/login" component={Login} />
+              <Route exact path="/register" component={Register} />
+              <Route exact path="/verify/:token" component={Verify} />
+              <Route exact path="/chat/:username" component={Chat} />
+              <Route exact path="/search" component={Search} />
+              <Route exact path="/chat" component={Contacts} />
               <Route exact path="/" component={Home} />
+
+              <Route path="" component={NotFound} />
+
             </Switch>
           </Container>
         </Router>
