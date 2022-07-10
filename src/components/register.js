@@ -124,8 +124,7 @@ export default function Register() {
           <Modal.Body>
             We have sent you a verification link to {data.register.email}.
             Please check your email and click on the link provided.
-            If you can't find the mail please check spam folder. Contact support@chatify.tech for futher information.
-          
+            If you can't find the mail please check spam folder. Contact support@chatify.tech for futher information.<br/><br/>
             Note: Account is auto verified for testing purpose.
           </Modal.Body>
           <Modal.Footer>
