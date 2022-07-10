@@ -125,6 +125,8 @@ export default function Register() {
             We have sent you a verification link to {data.register.email}.
             Please check your email and click on the link provided.
             If you can't find the mail please check spam folder. Contact support@chatify.tech for futher information.
+          
+            Note: Account is auto verified for testing purpose.
           </Modal.Body>
           <Modal.Footer>
             <Button variant="primary" as={Link} to="/">
