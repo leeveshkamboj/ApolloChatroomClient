@@ -23,9 +23,9 @@ import Contacts from "./components/contacts";
 import Search from "./components/search";
 import NotFound from "./components/404";
 
-const httpUrl = "https://apollochatroom.herokuapp.com/graphql";
+const httpUrl = "https://apolloserver-faf4dfab0161.herokuapp.com/graphql";
 // const httpUrl = "http://localhost:4000/graphql";
-const webSocketUrl = "wss://apollochatroom.herokuapp.com/graphql";
+const webSocketUrl = "wss://apolloserver-faf4dfab0161.herokuapp.com/graphql";
 // const webSocketUrl = "ws://localhost:4000/graphql";
 
 const wsLink = new WebSocketLink({
